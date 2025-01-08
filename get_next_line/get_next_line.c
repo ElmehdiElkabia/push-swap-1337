@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eelkabia <eelkabia@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: eelkabia <eelkabia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 09:44:28 by eelkabia          #+#    #+#             */
-/*   Updated: 2024/11/28 19:04:56 by eelkabia         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:34:56 by eelkabia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,18 @@ static char	*remainder_lines(char *line)
 	}
 	line[i + 1] = '\0';
 	return (remainder);
+}
+
+void	free_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	if (!array)
+		return ;
+	while (array[i])
+		free(array[i++]);
+	free(array);
 }
 
 char	*get_next_line(int fd)

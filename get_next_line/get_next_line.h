@@ -23,5 +23,6 @@
 # endif
 
 char	*get_next_line(int fd);
+void	free_array(char **array);
 
 #endif

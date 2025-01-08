@@ -36,6 +36,7 @@ typedef struct s_range
 void				push_to_stack(t_stack **stack, int value);
 t_stack				*init_stack(int argc, char **argv, t_stack *a);
 int					size_stack(t_stack *stack);
+void				free_array(char **array);
 // small sort
 void				small_sort(t_stack **a, t_stack **b, int size);
 void				sort_two(t_stack **a);

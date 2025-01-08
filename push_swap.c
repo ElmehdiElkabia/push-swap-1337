@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eelkabia <eelkabia@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: eelkabia <eelkabia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 20:24:03 by eelkabia          #+#    #+#             */
-/*   Updated: 2025/01/02 11:01:21 by eelkabia         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:34:12 by eelkabia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,18 @@ static void	free_stack(t_stack *stack)
 	}
 }
 
+void	free_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	if (!array)
+		return ;
+	while (array[i])
+		free(array[i++]);
+	free(array);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
@@ -57,9 +69,10 @@ int	main(int argc, char **argv)
 		error_msg();
 	if (argc < 2)
 		return (0);
-	stack_a = init_stack(argc, argv, NULL);
-	stack_b = NULL;
 	check_input(argc, argv);
+	stack_a = NULL;
+	stack_a = init_stack(argc, argv, stack_a);
+	stack_b = NULL;
 	sorted_stack(&stack_a, &stack_b);
 	free_stack(stack_a);
 	free_stack(stack_b);

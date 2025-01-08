@@ -72,7 +72,6 @@ t_stack	*init_stack(int argc, char **argv, t_stack *a)
 	char	*joined_args;
 	int		i;
 
-	a = NULL;
 	i = 0;
 	joined_args = join_arg(argc, argv);
 	array = ft_split(joined_args, ' ');
@@ -85,9 +84,6 @@ t_stack	*init_stack(int argc, char **argv, t_stack *a)
 		push_to_stack(&a, ft_atoi(array[i]));
 		i--;
 	}
-	i = 0;
-	while (array[i])
-		free(array[i++]);
-	free(array);
+	free_array(array);
 	return (a);
 }

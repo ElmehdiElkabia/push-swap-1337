@@ -32,7 +32,7 @@ void	error_msg(void)
 	exit(1);
 }
 
-static	char	*join_arg(int argc, char **argv)
+static char	*join_arg(int argc, char **argv)
 {
 	char	*joined;
 	char	*temp;

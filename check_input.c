@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eelkabia <eelkabia@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: eelkabia <eelkabia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:00:08 by eelkabia          #+#    #+#             */
-/*   Updated: 2025/01/02 11:06:00 by eelkabia         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:39:18 by eelkabia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	check_doubles(char **argv)
 		j = i + 1;
 		while (j < len)
 		{
-			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
+			if (ft_strcmp(argv[i], argv[j]) == 0)
 				return (1);
 			j++;
 		}
@@ -53,20 +53,29 @@ static int	is_empty_or_whitespace(char *str)
 static int	check_number(char *argv)
 {
 	int	i;
+	int	hyphen_count;
 
 	i = 0;
-	if (argv[i] == '-')
+	hyphen_count = 0;
+	while (ft_isspace(argv[i]))
 		i++;
+	if (argv[i] == '-' && argv[i + 1] != '\0')	
+	{
+		hyphen_count++;
+		i++;
+	}
+	if (!ft_isdigit(argv[i]))
+		return (0);
 	while (argv[i])
 	{
-		if (!ft_isdigit(argv[i]))
+		if (!ft_isdigit(argv[i]) && !ft_isspace(argv[i]))
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-static	char	*join_arg(int argc, char **argv)
+static char	*join_arg(int argc, char **argv)
 {
 	char	*joined;
 	char	*temp;
@@ -107,16 +116,17 @@ void	check_input(int argc, char **argv)
 	while (array[i])
 	{
 		tmp_argv = ft_atoi(array[i]);
-		if (tmp_argv < INT_MIN || tmp_argv > INT_MAX)
+		if (tmp_argv < INT_MIN || tmp_argv > INT_MAX || !check_number(array[i]))
+		{
+			free_array(array);
 			error_msg();
-		if (!check_number(array[i]))
-			error_msg();
+		}
 		i++;
 	}
 	if (check_doubles(array))
+	{
+		free_array(array);
 		error_msg();
-	i = 0;
-	while (array[i])
-		free(array[i++]);
-	free(array);
+	}
+	free_array(array);
 }
